@@ -34,7 +34,11 @@ YelpCamp is a web application for sharing and reviewing campgrounds. Users can c
     - Create a `.env` file in the root directory
     - Add your MongoDB connection string:
         ```
-        DB_URL=mongodb://localhost:27017/yelpcamp
+        DB_USER=your_db_user
+        DB_PASS=your_db_password
+        DB_HOST=your_db_host
+        DB_NAME=your_db_name
+        DB_OPTIONS=your_db_options
         ```
 
 4. Start the application:
@@ -49,8 +53,12 @@ YelpCamp is a web application for sharing and reviewing campgrounds. Users can c
 - `app.js` - The main application file
 - `models` - Mongoose models
 - `views` - EJS templates
+  - `layouts` - Layout templates
+  - `partials` - Partial templates
+  - `campgrounds` - Campground templates
 - `routes` - Application routes
 - `public` - Static files (CSS, JavaScript, images)
+- `seeds` - Database seed files
 
 ## License
 
