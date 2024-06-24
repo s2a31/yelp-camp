@@ -1,64 +1,60 @@
 # YelpCamp
 
-YelpCamp is a web application for sharing and reviewing campgrounds. Users can create, view, edit, and delete campgrounds. This project is built using Node.js, Express, MongoDB, and EJS.
+YelpCamp is a web application that allows users to browse, create, and review campgrounds. This project is built using Node.js, Express, and MongoDB, with additional front-end support from Bootstrap for styling.
 
 ## Features
 
-- View a list of all campgrounds
-- View details of a specific campground
-- Add a new campground
-- Edit an existing campground
-- Delete a campground
+- User authentication and authorization
+- CRUD operations for campgrounds
+- Server-side validation using Joi
+- Client-side validation using Bootstrap
+- Error handling with custom error classes
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js
-- MongoDB
-
-### Installation
+## Installation
 
 1. Clone the repository:
-    ```bash
+    ```sh
     git clone https://github.com/s2a31/yelpcamp.git
     cd yelpcamp
     ```
 
-2. Install the dependencies:
-    ```bash
+2. Install dependencies:
+    ```sh
     npm install
     ```
 
-3. Set up environment variables:
+3. Set up your environment variables:
     - Create a `.env` file in the root directory
-    - Add your MongoDB connection string:
+    - Add the following variables:
         ```
-        DB_USER=your_db_user
-        DB_PASS=your_db_password
-        DB_HOST=your_db_host
-        DB_NAME=your_db_name
-        DB_OPTIONS=your_db_options
+        DB_USER=yourDatabaseUsername
+        DB_PASS=yourDatabasePassword
+        DB_HOST=yourDatabaseHost
+        DB_NAME=yourDatabaseName
+        DB_OPTIONS=yourDatabaseOptions
         ```
 
-4. Start the application:
-    ```bash
-    nodemon app.js
+4. Start the server:
+    ```sh
+    node app.js
     ```
 
-5. Visit `http://localhost:3000` in your browser.
+## Usage
 
-## Project Structure
+- Visit `http://localhost:3000` to view the application.
+- Create an account or log in to add, edit, or delete campgrounds.
+- Browse and review existing campgrounds.
 
-- `app.js` - The main application file
-- `models` - Mongoose models
-- `views` - EJS templates
-  - `layouts` - Layout templates
-  - `partials` - Partial templates
-  - `campgrounds` - Campground templates
-- `routes` - Application routes
-- `public` - Static files (CSS, JavaScript, images)
-- `seeds` - Database seed files
+## Validation
+
+The application uses Joi for server-side validation and Bootstrap for client-side validation:
+
+- **Server-Side Validation**: Joi schemas ensure that all required fields are present and correctly formatted before processing requests.
+- **Client-Side Validation**: Bootstrap validation classes provide immediate feedback to users on form inputs.
+
+## Error Handling
+
+Custom error handling is implemented to provide meaningful error messages and to ensure the application does not crash due to unexpected issues. An `ExpressError` class is used to create consistent error responses, and an error-handling middleware renders error templates for a better user experience.
 
 ## License
 
