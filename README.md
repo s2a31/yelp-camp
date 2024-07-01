@@ -1,6 +1,6 @@
 # YelpCamp
 
-YelpCamp is a web application that allows users to browse, create, and review campgrounds. This project is built using Node.js, Express, and MongoDB, with additional front-end support from Bootstrap for styling.
+YelpCamp is a web application where users can create, view, edit, and delete campgrounds. Users can also leave reviews for campgrounds. The project demonstrates various web development concepts using Node.js, Express, MongoDB, and Mongoose.
 
 ## Features
 
@@ -9,6 +9,8 @@ YelpCamp is a web application that allows users to browse, create, and review ca
 - Server-side validation using Joi
 - Client-side validation using Bootstrap
 - Error handling with custom error classes
+- Reviews for campgrounds, including CRUD operations
+- Middleware to automatically delete associated reviews when a campground is deleted
 
 ## Installation
 
