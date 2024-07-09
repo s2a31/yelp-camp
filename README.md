@@ -11,6 +11,9 @@ YelpCamp is a web application where users can create, view, edit, and delete cam
 - Error handling with custom error classes
 - Reviews for campgrounds, including CRUD operations
 - Middleware to automatically delete associated reviews when a campground is deleted
+- Serving static assets
+- Configurable sessions for user authentication and flash messages
+- Flash messages for user feedback on actions (e.g., successful campground creation, review deletion)
 
 ## Installation
 
@@ -57,6 +60,18 @@ The application uses Joi for server-side validation and Bootstrap for client-sid
 ## Error Handling
 
 Custom error handling is implemented to provide meaningful error messages and to ensure the application does not crash due to unexpected issues. An `ExpressError` class is used to create consistent error responses, and an error-handling middleware renders error templates for a better user experience.
+
+## Flash Messages
+
+Flash messages are used to provide feedback to the user after certain actions, such as creating or deleting campgrounds and reviews. These messages are displayed using Bootstrap alerts and can be dismissed by the user.
+
+## Static Assets
+
+Static assets (e.g., images, custom style sheets, JavaScript files) are served from the public directory. This allows for the inclusion of custom styles and scripts to enhance the user interface and experience.
+
+## Session Configuration
+
+Sessions are configured using `express-session` to manage user authentication and flash messages. Sessions include a secret and have an expiration date set for security purposes.
 
 ## License
 
