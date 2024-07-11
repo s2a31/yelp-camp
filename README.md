@@ -14,6 +14,8 @@ YelpCamp is a web application where users can create, view, edit, and delete cam
 - Serving static assets
 - Configurable sessions for user authentication and flash messages
 - Flash messages for user feedback on actions (e.g., successful campground creation, review deletion)
+- Dynamic navigation bar showing login, register, and logout options based on user authentication status
+- Protected routes ensuring only authenticated users can create, edit, or delete campgrounds and reviews
 
 ## Installation
 
@@ -72,6 +74,16 @@ Static assets (e.g., images, custom style sheets, JavaScript files) are served f
 ## Session Configuration
 
 Sessions are configured using `express-session` to manage user authentication and flash messages. Sessions include a secret and have an expiration date set for security purposes.
+
+## User Authentication
+
+User authentication is implemented using Passport.js, which simplifies the process of handling authentication. The following features are included:
+- Registration of new users with unique usernames and emails
+- User login with session management
+- User logout
+- Dynamic display of navigation options based on authentication status
+- Middleware to protect routes and ensure only authenticated users can access certain features
+- Automatic redirection of users back to their intended page after login
 
 ## License
 
