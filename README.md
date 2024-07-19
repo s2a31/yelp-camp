@@ -16,6 +16,8 @@ YelpCamp is a web application where users can create, view, edit, and delete cam
 - Flash messages for user feedback on actions (e.g., successful campground creation, review deletion)
 - Dynamic navigation bar showing login, register, and logout options based on user authentication status
 - Protected routes ensuring only authenticated users can create, edit, or delete campgrounds and reviews
+- Association of campgrounds and reviews with their respective authors
+- Authorization middleware to check user permissions for editing and deleting campgrounds and reviews
 
 ## Installation
 
@@ -84,6 +86,13 @@ User authentication is implemented using Passport.js, which simplifies the proce
 - Dynamic display of navigation options based on authentication status
 - Middleware to protect routes and ensure only authenticated users can access certain features
 - Automatic redirection of users back to their intended page after login
+
+## User Authorization
+
+Authorization ensures that only the owners of campgrounds and reviews can edit or delete them. The following features are included:
+- Association of campgrounds and reviews with their respective authors
+- Middleware to check if the logged-in user is the author of a campground or review before allowing edit or delete operations
+- Hiding of edit and delete buttons for campgrounds and reviews if the logged-in user is not the author
 
 ## License
 
