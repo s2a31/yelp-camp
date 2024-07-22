@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); // Import mongoose library
 const cities = require('./cities'); // Import the cities data
 const { places, descriptors } = require('./seedHelpers'); // Destructure and import places and descriptors arrays from seedHelpers.js
 const Campground = require('../models/campground'); // Import the Campground model
@@ -14,7 +14,7 @@ mongoose.connect(uri);
 const db = mongoose.connection; // Get a reference to the database connection
 db.on('error', console.error.bind(console, 'connection error:')); // Handle connection errors
 db.once('open', () => {
-    console.log('Database connected to MongoDB Atlas');
+    console.log('Database connected to MongoDB Atlas'); // Log a message when successfully connected
 });
 
 // Function to pick a random element from an array
@@ -23,16 +23,16 @@ const sample = (array) => array[Math.floor(Math.random() * array.length)];
 // Seed function to delete all campgrounds and add new ones
 const seedDB = async () => {
     await Campground.deleteMany({}); // Delete all existing campgrounds
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 50; i++) { // Loop to create 50 new campgrounds
         const random1000 = Math.floor(Math.random() * 1000); // Pick a random index for cities array
-        const price = Math.floor(Math.random() * 20) + 10;
+        const price = Math.floor(Math.random() * 20) + 10; // Generate a random price between 10 and 30
         const camp = new Campground({
-            author: '66975fdf0fa92b6d1882311a',
+            author: '66975fdf0fa92b6d1882311a', // Set a static author ID for all seeded campgrounds
             location: `${cities[random1000].city}, ${cities[random1000].state}`, // Set location to a random city and state
             title: `${sample(descriptors)} ${sample(places)}`, // Combine a random descriptor and place to form the title
             image: sample(images), // Select a random image from the images array
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolores vero perferendis laudantium, consequuntur voluptatibus nulla architecto, sit soluta esse iure sed labore ipsam a cum nihil atque molestiae deserunt!',
-            price,
+            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolores vero perferendis laudantium, consequuntur voluptatibus nulla architecto, sit soluta esse iure sed labore ipsam a cum nihil atque molestiae deserunt!', // Set a static description for all seeded campgrounds
+            price, // Set the randomly generated price
         });
         await camp.save(); // Save the new campground to the database
     }

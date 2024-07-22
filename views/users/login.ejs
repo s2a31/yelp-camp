@@ -1,18 +1,21 @@
-<% layout('layouts/boilerplate')%>
-<h1>Login</h1>
-<form action="/login" method="POST" class="validated-form" novalidate>
+<% layout('layouts/boilerplate') %> <!-- Use the boilerplate layout for this view -->
+
+<h1>Login</h1> <!-- Page title -->
+
+<form action="/login" method="POST" class="validated-form" novalidate> <!-- Form to log in the user -->
     <div class="mb-3">
-        <label class="form-label" for="username">Username</label>
-        <input class="form-control" type="text" id="username" name="username" required />
+        <label class="form-label" for="username">Username</label> <!-- Label for the username field -->
+        <input class="form-control" type="text" id="username" name="username" required /> <!-- Input for the username -->
         <div class="valid-feedback">Looks good!</div>
-        <div class="invalid-feedback">Please provide a valid username.</div>
+        <div class="invalid-feedback">Please provide a valid username.</div> <!-- Validation feedback for the username field -->
     </div>
 
     <div class="mb-3">
-        <label class="form-label" for="password">Password</label>
-        <input class="form-control" type="password" id="password" name="password" required />
+        <label class="form-label" for="password">Password</label> <!-- Label for the password field -->
+        <input class="form-control" type="password" id="password" name="password" required /> <!-- Input for the password -->
         <div class="valid-feedback">Looks good!</div>
-        <div class="invalid-feedback">Please provide a valid password.</div>
+        <div class="invalid-feedback">Please provide a valid password.</div> <!-- Validation feedback for the password field -->
     </div>
-    <button class="btn btn-success">Login</button>
+    
+    <button class="btn btn-success">Login</button> <!-- Submit button to log in -->
 </form>

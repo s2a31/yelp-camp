@@ -1,11 +1,14 @@
-<% if(success && success.length) {%>
+<% if (success && success.length) { %> <!-- Check if there is a success message and it is not empty -->
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <%= success %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-<% } %> <% if(error && error.length) {%>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <%= error %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <%= success %> <!-- Display the success message -->
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> <!-- Button to close the alert -->
 </div>
 <% } %>
+
+<% if (error && error.length) { %> <!-- Check if there is an error message and it is not empty -->
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <%= error %> <!-- Display the error message -->
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> <!-- Button to close the alert -->
+</div>
+<% } %>
+    

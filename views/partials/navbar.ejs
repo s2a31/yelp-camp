@@ -1,21 +1,21 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">YelpCamp</a>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark"> <!-- Navbar with dark background, sticky to the top, and expandable on large screens -->
+    <div class="container-fluid"> <!-- Bootstrap container for fluid layout -->
+        <a class="navbar-brand" href="#">YelpCamp</a> <!-- Navbar brand link -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span> <!-- Button to toggle the navbar on small screens -->
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link" href="/">Home</a>
-                <a class="nav-link" href="/campgrounds">Campgrounds</a>
-                <a class="nav-link" href="/campgrounds/new">New Campground</a>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> <!-- Collapsible part of the navbar -->
+            <div class="navbar-nav"> <!-- Left-aligned navbar links -->
+                <a class="nav-link" href="/">Home</a> <!-- Link to the home page -->
+                <a class="nav-link" href="/campgrounds">Campgrounds</a> <!-- Link to the campgrounds page -->
+                <a class="nav-link" href="/campgrounds/new">New Campground</a> <!-- Link to the new campground page -->
             </div>
-            <div class="navbar-nav ms-auto">
-                <% if(!currentUser) {%>
-                <a class="nav-link" href="/login">Login</a>
-                <a class="nav-link" href="/register">Register</a>
-                <% } else {%>
-                <a class="nav-link" href="/logout">Logout</a>
+            <div class="navbar-nav ms-auto"> <!-- Right-aligned navbar links -->
+                <% if (!currentUser) { %> <!-- If there is no logged-in user -->
+                <a class="nav-link" href="/login">Login</a> <!-- Link to the login page -->
+                <a class="nav-link" href="/register">Register</a> <!-- Link to the registration page -->
+                <% } else { %> <!-- If there is a logged-in user -->
+                <a class="nav-link" href="/logout">Logout</a> <!-- Link to the logout action -->
                 <% } %>
             </div>
         </div>

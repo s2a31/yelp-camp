@@ -1,23 +1,25 @@
-<% layout('layouts/boilerplate')%>
-<h1>Register</h1>
-<form action="/register" method="POST" class="validated-form" novalidate>
+<% layout('layouts/boilerplate') %> <!-- Use the boilerplate layout for this view -->
+
+<h1>Register</h1> <!-- Page title -->
+
+<form action="/register" method="POST" class="validated-form" novalidate> <!-- Form to register a new user -->
     <div class="mb-3">
-        <label class="form-label" for="username">Username</label>
-        <input class="form-control" type="text" id="username" name="username" required />
+        <label class="form-label" for="username">Username</label> <!-- Label for the username field -->
+        <input class="form-control" type="text" id="username" name="username" required /> <!-- Input for the username -->
         <div class="valid-feedback">Looks good!</div>
-        <div class="invalid-feedback">Please provide a valid username.</div>
+        <div class="invalid-feedback">Please provide a valid username.</div> <!-- Validation feedback for the username field -->
     </div>
     <div class="mb-3">
-        <label class="form-label" for="email">Email</label>
-        <input class="form-control" type="email" id="email" name="email" required />
+        <label class="form-label" for="email">Email</label> <!-- Label for the email field -->
+        <input class="form-control" type="email" id="email" name="email" required /> <!-- Input for the email -->
         <div class="valid-feedback">Looks good!</div>
-        <div class="invalid-feedback">Please provide a valid email address.</div>
+        <div class="invalid-feedback">Please provide a valid email address.</div> <!-- Validation feedback for the email field -->
     </div>
     <div class="mb-3">
-        <label class="form-label" for="password">Password</label>
-        <input class="form-control" type="password" id="password" name="password" required />
+        <label class="form-label" for="password">Password</label> <!-- Label for the password field -->
+        <input class="form-control" type="password" id="password" name="password" required /> <!-- Input for the password -->
         <div class="valid-feedback">Looks good!</div>
-        <div class="invalid-feedback">Please provide a valid password.</div>
+        <div class="invalid-feedback">Please provide a valid password.</div> <!-- Validation feedback for the password field -->
     </div>
-    <button class="btn btn-success">Register</button>
+    <button class="btn btn-success">Register</button> <!-- Submit button to register -->
 </form>

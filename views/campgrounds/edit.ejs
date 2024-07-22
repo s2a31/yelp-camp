@@ -1,46 +1,53 @@
-<% layout('layouts/boilerplate')%>
+<% layout('layouts/boilerplate')%> <!-- Use the boilerplate layout for this view -->
+
 <div class="row">
-    <h1 class="text-center">Edit Campground</h1>
-    <div class="col-md-6 offset-md-3">
+    <h1 class="text-center">Edit Campground</h1> <!-- Page title -->
+    <div class="col-md-6 offset-md-3"> <!-- Center the form on the page -->
         <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+            <!-- Form for editing a campground; uses PUT method via method-override -->
             <div class="mb-3">
-                <label class="form-label" for="title">Title</label>
+                <label class="form-label" for="title">Title</label> <!-- Label for the title field -->
                 <input class="form-control" type="text" id="title" name="campground[title]" value="<%=campground.title %>" required />
+                <!-- Input for the title; pre-filled with the current title -->
                 <div class="valid-feedback">Looks good!</div>
                 <div class="invalid-feedback">Please provide a valid title.</div>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="location">Location</label>
+                <label class="form-label" for="location">Location</label> <!-- Label for the location field -->
                 <input class="form-control" type="text" id="location" name="campground[location]" value="<%=campground.location %>" required />
+                <!-- Input for the location; pre-filled with the current location -->
                 <div class="valid-feedback">Looks good!</div>
                 <div class="invalid-feedback">Please provide a valid location.</div>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="image">Image Url</label>
+                <label class="form-label" for="image">Image Url</label> <!-- Label for the image URL field -->
                 <input class="form-control" type="text" id="image" name="campground[image]" value="<%=campground.image %>" required />
+                <!-- Input for the image URL; pre-filled with the current image URL -->
                 <div class="valid-feedback">Looks good!</div>
                 <div class="invalid-feedback">Please provide a valid image URL.</div>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="price">Campground Price</label>
+                <label class="form-label" for="price">Campground Price</label> <!-- Label for the price field -->
                 <div class="input-group">
-                    <span class="input-group-text" id="price-label">$</span>
+                    <span class="input-group-text" id="price-label">$</span> <!-- Dollar sign prefix for the price input -->
                     <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label" name="campground[price]" value="<%=campground.price %>" required />
+                    <!-- Input for the price; pre-filled with the current price -->
                     <div class="valid-feedback">Looks good!</div>
                     <div class="invalid-feedback">Please provide a valid price.</div>
                 </div>
             </div>
 
             <div class="mb-3">
-                <label class="form-label" for="description">Description</label>
+                <label class="form-label" for="description">Description</label> <!-- Label for the description field -->
                 <textarea class="form-control" id="description" name="campground[description]" required><%= campground.description%></textarea>
+                <!-- Textarea for the description; pre-filled with the current description -->
                 <div class="valid-feedback">Looks good!</div>
                 <div class="invalid-feedback">Please provide a valid description.</div>
             </div>
             <div class="mb-3">
-                <button class="btn btn-info">Update Campground</button>
+                <button class="btn btn-info">Update Campground</button> <!-- Submit button to update the campground -->
             </div>
         </form>
-        <a href="/campgrounds/<%= campground._id%>">Back To Campground</a>
+        <a href="/campgrounds/<%= campground._id%>">Back To Campground</a> <!-- Link to go back to the campground show page -->
     </div>
 </div>

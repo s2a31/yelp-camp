@@ -1,51 +1,26 @@
-const express = require('express');
-const router = express.Router();
-const passport = require('passport');
-const catchAsync = require('../utils/catchAsync');
-const User = require('../models/user');
-const { storeReturnTo } = require('../middleware');
+const express = require('express'); // Import Express
+const router = express.Router(); // Create a new router object
+const passport = require('passport'); // Import Passport for authentication
+const catchAsync = require('../utils/catchAsync'); // Import the catchAsync utility for error handling
+const User = require('../models/user'); // Import the User model
+const { storeReturnTo } = require('../middleware'); // Import middleware to store the return URL
+const users = require('../controllers/users'); // Import the users controller
 
-router.get('/register', (req, res) => {
-    res.render('users/register');
-});
+// Route for user registration
+router.route('/register')
+    .get(users.renderRegister) // GET request to render the registration form
+    .post(catchAsync(users.register)); // POST request to handle user registration
 
-router.post(
-    '/register',
-    catchAsync(async (req, res, next) => {
-        try {
-            const { email, username, password } = req.body;
-            const user = new User({ email, username });
-            const registeredUser = await User.register(user, password);
-            req.login(registeredUser, (err) => {
-                if (err) return next(err);
-                req.flash('success', 'Welcome to Yelp Camp!');
-                res.redirect('/campgrounds');
-            });
-        } catch (e) {
-            req.flash('error', e.message);
-            res.redirect('register');
-        }
-    })
-);
+// Route for user login
+router.route('/login')
+    .get(users.renderLogin) // GET request to render the login form
+    .post(
+        storeReturnTo, // Middleware to store the return URL
+        passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), // Authenticate the user using Passport
+        users.login // Handle the login logic
+    );
 
-router.get('/login', (req, res) => {
-    res.render('users/login');
-});
+// Route for user logout
+router.get('/logout', users.logout); // GET request to handle user logout
 
-router.post('/login', storeReturnTo, passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
-    req.flash('success', 'Welcome back!');
-    const redirectUrl = res.locals.returnTo || '/campgrounds';
-    res.redirect(redirectUrl);
-});
-
-router.get('/logout', (req, res, next) => {
-    req.logout(function (err) {
-        if (err) {
-            return next(err);
-        }
-        req.flash('success', 'Goodbye!');
-        res.redirect('/campgrounds');
-    });
-});
-
-module.exports = router;
+module.exports = router; // Export the router object

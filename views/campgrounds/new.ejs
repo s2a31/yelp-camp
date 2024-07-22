@@ -1,45 +1,46 @@
-<% layout('layouts/boilerplate')%>
+<% layout('layouts/boilerplate')%> <!-- Use the boilerplate layout for this view -->
+
 <div class="row">
-    <h1 class="text-center">New Campground</h1>
-    <div class="col-md-6 offset-md-3">
-        <form action="/campgrounds" method="POST" novalidate class="validated-form">
+    <h1 class="text-center">New Campground</h1> <!-- Page title -->
+    <div class="col-md-6 offset-md-3"> <!-- Center the form on the page -->
+        <form action="/campgrounds" method="POST" novalidate class="validated-form"> <!-- Form to add a new campground -->
             <div class="mb-3">
-                <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" id="title" name="campground[title]" required />
+                <label class="form-label" for="title">Title</label> <!-- Label for the title field -->
+                <input class="form-control" type="text" id="title" name="campground[title]" required /> <!-- Input for the title -->
                 <div class="valid-feedback">Looks good!</div>
-                <div class="invalid-feedback">Please provide a title.</div>
+                <div class="invalid-feedback">Please provide a title.</div> <!-- Validation feedback for the title field -->
             </div>
             <div class="mb-3">
-                <label class="form-label" for="location">Location</label>
-                <input class="form-control" type="text" id="location" name="campground[location]" required />
+                <label class="form-label" for="location">Location</label> <!-- Label for the location field -->
+                <input class="form-control" type="text" id="location" name="campground[location]" required /> <!-- Input for the location -->
                 <div class="valid-feedback">Looks good!</div>
-                <div class="invalid-feedback">Please provide a location.</div>
+                <div class="invalid-feedback">Please provide a location.</div> <!-- Validation feedback for the location field -->
             </div>
             <div class="mb-3">
-                <label class="form-label" for="image">Image Url</label>
-                <input class="form-control" type="text" id="image" name="campground[image]" required />
+                <label class="form-label" for="image">Image Url</label> <!-- Label for the image URL field -->
+                <input class="form-control" type="text" id="image" name="campground[image]" required /> <!-- Input for the image URL -->
                 <div class="valid-feedback">Looks good!</div>
-                <div class="invalid-feedback">Please provide an image URL.</div>
+                <div class="invalid-feedback">Please provide an image URL.</div> <!-- Validation feedback for the image URL field -->
             </div>
             <div class="mb-3">
-                <label class="form-label" for="price">Campground Price</label>
+                <label class="form-label" for="price">Campground Price</label> <!-- Label for the price field -->
                 <div class="input-group">
-                    <span class="input-group-text" id="price-label">$</span>
-                    <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label" name="campground[price]" required />
+                    <span class="input-group-text" id="price-label">$</span> <!-- Dollar sign prefix for the price input -->
+                    <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label" name="campground[price]" required /> <!-- Input for the price -->
                 </div>
                 <div class="valid-feedback">Looks good!</div>
-                <div class="invalid-feedback">Please provide a price.</div>
+                <div class="invalid-feedback">Please provide a price.</div> <!-- Validation feedback for the price field -->
             </div>
             <div class="mb-3">
-                <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" id="description" name="campground[description]" required></textarea>
+                <label class="form-label" for="description">Description</label> <!-- Label for the description field -->
+                <textarea class="form-control" id="description" name="campground[description]" required></textarea> <!-- Textarea for the description -->
                 <div class="valid-feedback">Looks good!</div>
-                <div class="invalid-feedback">Please provide a description.</div>
+                <div class="invalid-feedback">Please provide a description.</div> <!-- Validation feedback for the description field -->
             </div>
             <div class="mb-3">
-                <button class="btn btn-success">Add Campground</button>
+                <button class="btn btn-success">Add Campground</button> <!-- Submit button to add the campground -->
             </div>
         </form>
-        <a href="/campgrounds">All Campgrounds</a>
+        <a href="/campgrounds">All Campgrounds</a> <!-- Link to go back to the campgrounds index page -->
     </div>
 </div>
