@@ -1,10 +1,29 @@
-<% layout('layouts/boilerplate')%> <!-- Use the boilerplate layout for this view -->
+<% layout('layouts/boilerplate') %> <!-- Use the boilerplate layout for this view -->
 <link rel="stylesheet" href="/stylesheets/stars.css" /> <!-- Link to the CSS file for star ratings -->
 
 <div class="row">
     <div class="col-md-6">
+        <div id="campgroundCarousel" class="carousel slide" data-bs-ride="carousel"> <!-- Bootstrap carousel for images -->
+            <div class="carousel-inner">
+                <% campground.images.forEach((img, i) => { %> <!-- Loop through each image of the campground -->
+                <div class="carousel-item <%= i === 0 ? 'active' : '' %>"> <!-- Set the first image as active -->
+                    <img src="<%= img.url %>" class="d-block w-100" alt=""> <!-- Display the image -->
+                </div>
+                <% }) %>
+            </div>
+            <% if (campground.images.length > 1) { %> <!-- If there are multiple images, display carousel controls -->
+            <a class="carousel-control-prev" href="#campgroundCarousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#campgroundCarousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </a>
+            <% } %>
+        </div>
+
         <div class="card mb-3">
-            <img src="<%= campground.image %>" class="card-img-top" alt="..." /> <!-- Display the campground image -->
             <div class="card-body">
                 <h5 class="card-title"><%= campground.title %></h5> <!-- Display the campground title -->
                 <p class="card-text"><%= campground.description %></p> <!-- Display the campground description -->
@@ -30,17 +49,17 @@
         <h2>Leave a Review</h2>
         <form action="/campgrounds/<%= campground._id %>/reviews" method="POST" class="mb-3 validated-form" novalidate> <!-- Form to submit a review -->
             <fieldset class="starability-checkmark">
-                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
-                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
-                <label for="first-rate1" title="Terrible">1 star</label>
-                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
-                <label for="first-rate2" title="Not good">2 stars</label>
-                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
-                <label for="first-rate3" title="Average">3 stars</label>
-                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
-                <label for="first-rate4" title="Very good">4 stars</label>
-                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
-                <label for="first-rate5" title="Amazing">5 stars</label>
+                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." /> <!-- Default hidden rating input -->
+                <input type="radio" id="first-rate1" name="review[rating]" value="1" /> <!-- Rating input for 1 star -->
+                <label for="first-rate1" title="Terrible">1 star</label> <!-- Label for 1 star rating -->
+                <input type="radio" id="first-rate2" name="review[rating]" value="2" /> <!-- Rating input for 2 stars -->
+                <label for="first-rate2" title="Not good">2 stars</label> <!-- Label for 2 stars rating -->
+                <input type="radio" id="first-rate3" name="review[rating]" value="3" /> <!-- Rating input for 3 stars -->
+                <label for="first-rate3" title="Average">3 stars</label> <!-- Label for 3 stars rating -->
+                <input type="radio" id="first-rate4" name="review[rating]" value="4" /> <!-- Rating input for 4 stars -->
+                <label for="first-rate4" title="Very good">4 stars</label> <!-- Label for 4 stars rating -->
+                <input type="radio" id="first-rate5" name="review[rating]" value="5" /> <!-- Rating input for 5 stars -->
+                <label for="first-rate5" title="Amazing">5 stars</label> <!-- Label for 5 stars rating -->
             </fieldset>
             <div class="mb-3">
                 <label class="form-label" for="body">Review</label> <!-- Label for the review textarea -->

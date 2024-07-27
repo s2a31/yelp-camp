@@ -1,4 +1,5 @@
 const Campground = require('../models/campground'); // Import the Campground model
+const { cloudinary } = require("../cloudinary"); // Import the configured Cloudinary instance
 
 // Controller function to display all campgrounds
 module.exports.index = async (req, res) => {
@@ -9,8 +10,10 @@ module.exports.index = async (req, res) => {
 // Controller function to create a new campground
 module.exports.createCampground = async (req, res) => {
     const campground = new Campground(req.body.campground); // Create a new campground instance with data from the request body
+    campground.images = req.files.map(f => ({ url: f.path, filename: f.filename })); // Map the uploaded files to campground images
     campground.author = req.user._id; // Set the author of the campground to the logged-in user
     await campground.save(); // Save the new campground to the database
+    console.log(campground);
     req.flash('success', 'Successfully made a new campground!'); // Flash a success message
     res.redirect(`/campgrounds/${campground._id}`); // Redirect to the newly created campground's show page
 };
@@ -41,6 +44,15 @@ module.exports.showCampground = async (req, res) => {
 module.exports.updateCampground = async (req, res) => {
     const { id } = req.params; // Extract the campground ID from the request parameters
     const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground }); // Find and update the campground with new data
+    const imgs = req.files.map(f => ({ url: f.path, filename: f.filename })); // Map the uploaded files to new images
+    campground.images.push(...imgs); // Add new images to the campground
+    await campground.save(); // Save the updated campground to the database
+    if (req.body.deleteImages) { // If there are images to delete
+        for (let filename of req.body.deleteImages) {
+            await cloudinary.uploader.destroy(filename); // Delete images from Cloudinary
+        }
+        await campground.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } }) // Remove images from campground document
+    }
     req.flash('success', 'Successfully updated campground!'); // Flash a success message
     res.redirect(`/campgrounds/${campground._id}`); // Redirect to the updated campground's show page
 };

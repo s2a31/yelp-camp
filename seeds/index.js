@@ -23,16 +23,26 @@ const sample = (array) => array[Math.floor(Math.random() * array.length)];
 // Seed function to delete all campgrounds and add new ones
 const seedDB = async () => {
     await Campground.deleteMany({}); // Delete all existing campgrounds
-    for (let i = 0; i < 50; i++) { // Loop to create 50 new campgrounds
+    for (let i = 0; i < 50; i++) {
+        // Loop to create 50 new campgrounds
         const random1000 = Math.floor(Math.random() * 1000); // Pick a random index for cities array
         const price = Math.floor(Math.random() * 20) + 10; // Generate a random price between 10 and 30
         const camp = new Campground({
             author: '66975fdf0fa92b6d1882311a', // Set a static author ID for all seeded campgrounds
             location: `${cities[random1000].city}, ${cities[random1000].state}`, // Set location to a random city and state
             title: `${sample(descriptors)} ${sample(places)}`, // Combine a random descriptor and place to form the title
-            image: sample(images), // Select a random image from the images array
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolores vero perferendis laudantium, consequuntur voluptatibus nulla architecto, sit soluta esse iure sed labore ipsam a cum nihil atque molestiae deserunt!', // Set a static description for all seeded campgrounds
             price, // Set the randomly generated price
+            images: [
+                {
+                    url: 'https://res.cloudinary.com/dfjatsdjg/image/upload/v1721921217/YelpCamp/xhgv3naoh0gbsgunlsd6.jpg',
+                    filename: 'YelpCamp/xhgv3naoh0gbsgunlsd6',
+                },
+                {
+                    url: 'https://res.cloudinary.com/dfjatsdjg/image/upload/v1721921219/YelpCamp/qqq8cccx6jfy0bcjva3s.jpg',
+                    filename: 'YelpCamp/qqq8cccx6jfy0bcjva3s',
+                },
+            ], // Set static images for all seeded campgrounds
         });
         await camp.save(); // Save the new campground to the database
     }

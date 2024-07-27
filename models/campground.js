@@ -2,10 +2,21 @@ const mongoose = require('mongoose'); // Import mongoose library
 const Review = require('./review'); // Import the Review model
 const Schema = mongoose.Schema; // Use the Schema constructor from mongoose
 
+// Define the schema for an image
+const ImageSchema = new Schema({
+    url: String, // URL of the image
+    filename: String // Filename of the image
+});
+
+// Virtual property to generate a thumbnail URL
+ImageSchema.virtual('thumbnail').get(function () {
+    return this.url.replace('/upload', '/upload/w_200'); // Modify the URL to request a 200px wide version of the image
+});
+
 // Define the schema for Campground
 const CampgroundSchema = new Schema({
     title: String, // Title of the campground
-    image: String, // URL to an image of the campground
+    images: [ImageSchema],
     price: Number, // Price of staying at the campground
     description: String, // Description of the campground
     location: String, // Location of the campground

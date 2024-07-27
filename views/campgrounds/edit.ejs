@@ -3,7 +3,7 @@
 <div class="row">
     <h1 class="text-center">Edit Campground</h1> <!-- Page title -->
     <div class="col-md-6 offset-md-3"> <!-- Center the form on the page -->
-        <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+        <form id="editCampgroundForm" action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
             <!-- Form for editing a campground; uses PUT method via method-override -->
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label> <!-- Label for the title field -->
@@ -18,13 +18,6 @@
                 <!-- Input for the location; pre-filled with the current location -->
                 <div class="valid-feedback">Looks good!</div>
                 <div class="invalid-feedback">Please provide a valid location.</div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="image">Image Url</label> <!-- Label for the image URL field -->
-                <input class="form-control" type="text" id="image" name="campground[image]" value="<%=campground.image %>" required />
-                <!-- Input for the image URL; pre-filled with the current image URL -->
-                <div class="valid-feedback">Looks good!</div>
-                <div class="invalid-feedback">Please provide a valid image URL.</div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="price">Campground Price</label> <!-- Label for the price field -->
@@ -45,9 +38,87 @@
                 <div class="invalid-feedback">Please provide a valid description.</div>
             </div>
             <div class="mb-3">
+                <label class="form-label" for="price">Add More Image(s):</label> <!-- Label for the image upload field -->
+                <input type="file" class="filepond" id="image" name="image" multiple> <!-- File input for uploading multiple images -->
+            </div>
+            <div class="mb-3">
+                <% campground.images.forEach(function(img, i) {  %> <!-- Loop through each image associated with the campground -->
+                <img src="<%=img.thumbnail %>" class="img-thumbnail" alt=""> <!-- Display thumbnail of the image -->
+                <div class="form-check-inline">
+                    <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>"> <!-- Checkbox to mark image for deletion -->
+                </div>
+                <label for="image-<%=i%>">Delete?</label> <!-- Label for the delete checkbox -->
+                <% })%>
+            </div>
+            <div class="mb-3">
                 <button class="btn btn-info">Update Campground</button> <!-- Submit button to update the campground -->
             </div>
         </form>
         <a href="/campgrounds/<%= campground._id%>">Back To Campground</a> <!-- Link to go back to the campground show page -->
+
+        <script>
+            // Function to initialize FilePond
+            function initializeFilePond() {
+                // Register the FilePond Image Preview plugin
+                FilePond.registerPlugin(FilePondPluginImagePreview);
+    
+                // Select the file input element
+                const inputElement = document.querySelector('input#image');
+    
+                // Create a FilePond instance
+                return FilePond.create(inputElement, {
+                    instantUpload: false,
+                    allowMultiple: true,
+                    name: 'image'
+                });
+            }
+    
+            // Function to handle form submission
+            async function handleFormSubmission(event, pond) {
+                event.preventDefault(); // Prevent the form from submitting normally
+    
+                // Get the form element
+                const form = event.target;
+    
+                // Create a new FormData object
+                const formData = new FormData(form);
+    
+                // Remove empty values for 'image' field
+                formData.delete('image');
+    
+                // Add FilePond files to the form data
+                const files = pond.getFiles();
+                files.forEach(fileItem => {
+                    formData.append('image', fileItem.file, fileItem.file.name);
+                });
+    
+                // Submit the form using fetch
+                try {
+                    const response = await fetch(form.action, {
+                        method: form.method,
+                        body: formData
+                    });
+    
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+    
+                    // If form submission is successful, follow the redirect from the response
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    }
+                } catch (error) {
+                    console.error('There was a problem with the fetch operation:', error);
+                }
+            }
+    
+            // Initialize FilePond
+            const pond = initializeFilePond();
+    
+            // Add event listener for form submission
+            document.getElementById('editCampgroundForm').addEventListener('submit', (event) => {
+                handleFormSubmission(event, pond);
+            });
+        </script>
     </div>
 </div>

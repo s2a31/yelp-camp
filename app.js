@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config(); // Load environment variables from .env file if not in production
+}
+
 const express = require('express'); // Import Express
 const path = require('path'); // Import Path
 const mongoose = require('mongoose'); // Import Mongoose
@@ -9,7 +13,6 @@ const methodOverride = require('method-override'); // Import method-override for
 const passport = require('passport'); // Import Passport for authentication
 const LocalStrategy = require('passport-local'); // Import Passport-Local for local authentication strategy
 const User = require('./models/user'); // Import User model
-require('dotenv').config(); // Load environment variables from .env file
 
 const userRoutes = require('./routes/users'); // Import user routes
 const campgroundRoutes = require('./routes/campgrounds'); // Import campground routes
@@ -19,7 +22,7 @@ const reviewRoutes = require('./routes/reviews'); // Import review routes
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}?${process.env.DB_OPTIONS}`;
 
 // Connect to MongoDB Atlas using Mongoose
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(uri);
 
 const db = mongoose.connection; // Get a reference to the database connection
 db.on('error', console.error.bind(console, 'connection error:')); // Handle connection errors
@@ -60,7 +63,6 @@ passport.deserializeUser(User.deserializeUser()); // Deserialize user from sessi
 
 // Middleware to set up local variables for templates
 app.use((req, res, next) => {
-    console.log(req.session); // Log the session
     res.locals.currentUser = req.user; // Set the current user
     res.locals.success = req.flash('success'); // Set success flash message
     res.locals.error = req.flash('error'); // Set error flash message

@@ -6,10 +6,11 @@ module.exports.campgroundSchema = Joi.object({
     campground: Joi.object({
         title: Joi.string().required(), // Campground title must be a string and is required
         price: Joi.number().required().min(0), // Campground price must be a number, required, and at least 0
-        image: Joi.string().required(), // Campground image URL must be a string and is required
+        // image: Joi.string().required(), // Campground image URL must be a string and is required
         location: Joi.string().required(), // Campground location must be a string and is required
         description: Joi.string().required() // Campground description must be a string and is required
-    }).required() // The campground object itself is required
+    }).required(), // The campground object itself is required
+    deleteImages: Joi.array() // Array of images to be deleted
 });
 
 // Define a validation schema for reviews

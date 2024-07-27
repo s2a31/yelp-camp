@@ -3,7 +3,7 @@
 <div class="row">
     <h1 class="text-center">New Campground</h1> <!-- Page title -->
     <div class="col-md-6 offset-md-3"> <!-- Center the form on the page -->
-        <form action="/campgrounds" method="POST" novalidate class="validated-form"> <!-- Form to add a new campground -->
+        <form action="/campgrounds" method="POST" novalidate id="newCampgroundForm" class="validated-form" enctype="multipart/form-data"> <!-- Form to add a new campground -->
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label> <!-- Label for the title field -->
                 <input class="form-control" type="text" id="title" name="campground[title]" required /> <!-- Input for the title -->
@@ -15,12 +15,6 @@
                 <input class="form-control" type="text" id="location" name="campground[location]" required /> <!-- Input for the location -->
                 <div class="valid-feedback">Looks good!</div>
                 <div class="invalid-feedback">Please provide a location.</div> <!-- Validation feedback for the location field -->
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="image">Image Url</label> <!-- Label for the image URL field -->
-                <input class="form-control" type="text" id="image" name="campground[image]" required /> <!-- Input for the image URL -->
-                <div class="valid-feedback">Looks good!</div>
-                <div class="invalid-feedback">Please provide an image URL.</div> <!-- Validation feedback for the image URL field -->
             </div>
             <div class="mb-3">
                 <label class="form-label" for="price">Campground Price</label> <!-- Label for the price field -->
@@ -38,9 +32,78 @@
                 <div class="invalid-feedback">Please provide a description.</div> <!-- Validation feedback for the description field -->
             </div>
             <div class="mb-3">
+                <label class="form-label" for="price">Add Campground Image(s):</label> <!-- Label for the image upload field -->
+                <input type="file" class="filepond" id="image" name="image" multiple> <!-- File input for uploading multiple images -->
+            </div>
+            <div class="mb-3">
                 <button class="btn btn-success">Add Campground</button> <!-- Submit button to add the campground -->
             </div>
         </form>
         <a href="/campgrounds">All Campgrounds</a> <!-- Link to go back to the campgrounds index page -->
+
+        <script>
+            // Function to initialize FilePond
+            function initializeFilePond() {
+                // Register the FilePond Image Preview plugin
+                FilePond.registerPlugin(FilePondPluginImagePreview);
+    
+                // Select the file input element
+                const inputElement = document.querySelector('input#image');
+    
+                // Create a FilePond instance
+                return FilePond.create(inputElement, {
+                    instantUpload: false,
+                    allowMultiple: true,
+                    name: 'image'
+                });
+            }
+    
+            // Function to handle form submission
+            async function handleFormSubmission(event, pond) {
+                event.preventDefault(); // Prevent the form from submitting normally
+    
+                // Get the form element
+                const form = event.target;
+    
+                // Create a new FormData object
+                const formData = new FormData(form);
+    
+                // Remove empty values for 'image' field
+                formData.delete('image');
+    
+                // Add FilePond files to the form data
+                const files = pond.getFiles();
+                files.forEach(fileItem => {
+                    formData.append('image', fileItem.file, fileItem.file.name);
+                });
+    
+                // Submit the form using fetch
+                try {
+                    const response = await fetch(form.action, {
+                        method: form.method,
+                        body: formData
+                    });
+    
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+    
+                    // If form submission is successful, follow the redirect from the response
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    }
+                } catch (error) {
+                    console.error('There was a problem with the fetch operation:', error);
+                }
+            }
+    
+            // Initialize FilePond
+            const pond = initializeFilePond();
+    
+            // Add event listener for form submission
+            document.getElementById('newCampgroundForm').addEventListener('submit', (event) => {
+                handleFormSubmission(event, pond);
+            });
+        </script>
     </div>
 </div>

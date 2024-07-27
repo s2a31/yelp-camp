@@ -21,6 +21,12 @@ YelpCamp is a web application where users can create, view, edit, and delete cam
 - Display of star ratings for campgrounds and reviews
 - User-friendly star rating form for submitting reviews
 - Refactored codebase with controllers for better organization and maintainability
+- Image upload functionality with Cloudinary integration
+  - Upload multiple images per campground
+  - Store image URLs in MongoDB
+  - Display images in a Bootstrap carousel
+  - Delete images from both MongoDB and Cloudinary
+  - Generate image thumbnails using Cloudinary transformation API
 
 ## Installation
 
@@ -44,6 +50,9 @@ YelpCamp is a web application where users can create, view, edit, and delete cam
         DB_HOST=yourDatabaseHost
         DB_NAME=yourDatabaseName
         DB_OPTIONS=yourDatabaseOptions
+        CLOUDINARY_CLOUD_NAME=yourCloudinaryCloudName
+        CLOUDINARY_KEY=yourCloudinaryAPIKey
+        CLOUDINARY_SECRET=yourCloudinaryAPISecret
         ```
 
 4. Start the server:
@@ -102,6 +111,15 @@ Authorization ensures that only the owners of campgrounds and reviews can edit o
 The application includes an interactive and accessible star rating system for user reviews:
 - Display of star ratings for campgrounds and reviews using CSS
 - User-friendly star rating form for submitting reviews without JavaScript
+
+## Image Upload
+
+The application supports image upload functionality with Cloudinary integration:
+- Upload multiple images per campground
+- Store image URLs in MongoDB
+- Display images in a Bootstrap carousel
+- Delete images from both MongoDB and Cloudinary
+- Generate image thumbnails using Cloudinary transformation API
 
 ## Code Organization
 
