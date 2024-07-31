@@ -45,6 +45,8 @@
         </div>
     </div>
     <div class="col-md-6">
+        <div id='map' style='width: 400px; height: 300px;'></div> <!-- Div for displaying the map -->
+
         <% if (currentUser) { %> <!-- If there is a logged-in user -->
         <h2>Leave a Review</h2>
         <form action="/campgrounds/<%= campground._id %>/reviews" method="POST" class="mb-3 validated-form" novalidate> <!-- Form to submit a review -->
@@ -87,3 +89,10 @@
         <% } %>
     </div>
 </div>
+
+<script>
+    const mapToken = '<%- process.env.MAPBOX_TOKEN %>'; // Set the Mapbox access token from the environment variable
+    const campground = <%- JSON.stringify(campground) %>; // Pass the campground data to JavaScript
+</script>
+
+<script src="/javascripts/showPageMap.js"></script> <!-- Link to the JavaScript file for the map -->

@@ -27,6 +27,13 @@ YelpCamp is a web application where users can create, view, edit, and delete cam
   - Display images in a Bootstrap carousel
   - Delete images from both MongoDB and Cloudinary
   - Generate image thumbnails using Cloudinary transformation API
+- Interactive maps with Mapbox integration
+  - Geocode user-provided locations to obtain latitude and longitude coordinates
+  - Store GeoJSON data for campground locations in MongoDB
+  - Display maps centered on campground locations
+  - Add markers to maps for campground locations
+  - Custom map popups displaying campground title and location
+  - Customize map styles
 
 ## Installation
 
@@ -53,6 +60,7 @@ YelpCamp is a web application where users can create, view, edit, and delete cam
         CLOUDINARY_CLOUD_NAME=yourCloudinaryCloudName
         CLOUDINARY_KEY=yourCloudinaryAPIKey
         CLOUDINARY_SECRET=yourCloudinaryAPISecret
+        MAPBOX_TOKEN=yourMapboxToken
         ```
 
 4. Start the server:
@@ -120,6 +128,16 @@ The application supports image upload functionality with Cloudinary integration:
 - Display images in a Bootstrap carousel
 - Delete images from both MongoDB and Cloudinary
 - Generate image thumbnails using Cloudinary transformation API
+
+## Map Integration
+
+The application includes interactive map features using Mapbox:
+- Geocode user-provided locations to obtain latitude and longitude coordinates
+- Store GeoJSON data for campground locations in MongoDB
+- Display maps centered on campground locations
+- Add markers to maps for campground locations
+- Custom map popups displaying campground title and location
+- Customize map styles
 
 ## Code Organization
 

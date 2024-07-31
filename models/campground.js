@@ -16,7 +16,18 @@ ImageSchema.virtual('thumbnail').get(function () {
 // Define the schema for Campground
 const CampgroundSchema = new Schema({
     title: String, // Title of the campground
-    images: [ImageSchema],
+    images: [ImageSchema], // Array of images associated with the campground
+    geometry: {
+        type: {
+            type: String, // Type of the geometry, should be 'Point'
+            enum: ['Point'], // Enforce the geometry type to be 'Point'
+            required: true // Make the type field required
+        },
+        coordinates: {
+            type: [Number], // Coordinates array of numbers (longitude and latitude)
+            required: true // Make the coordinates field required
+        }
+    },
     price: Number, // Price of staying at the campground
     description: String, // Description of the campground
     location: String, // Location of the campground

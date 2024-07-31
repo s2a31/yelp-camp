@@ -33,13 +33,17 @@ const seedDB = async () => {
             title: `${sample(descriptors)} ${sample(places)}`, // Combine a random descriptor and place to form the title
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolores vero perferendis laudantium, consequuntur voluptatibus nulla architecto, sit soluta esse iure sed labore ipsam a cum nihil atque molestiae deserunt!', // Set a static description for all seeded campgrounds
             price, // Set the randomly generated price
+            geometry: {
+                type: "Point", // Set the type of geometry to Point
+                coordinates: [-113.1331, 47.0202] // Set static coordinates for all seeded campgrounds
+            },
             images: [
                 {
                     url: 'https://res.cloudinary.com/dfjatsdjg/image/upload/v1721921217/YelpCamp/xhgv3naoh0gbsgunlsd6.jpg',
                     filename: 'YelpCamp/xhgv3naoh0gbsgunlsd6',
                 },
                 {
-                    url: 'https://res.cloudinary.com/dfjatsdjg/image/upload/v1721921219/YelpCamp/qqq8cccx6jfy0bcjva3s.jpg',
+                    url: 'https://res.cloudinary.com/dfjatsdjg/image/upload/v1722022384/YelpCamp/snu0uuxjqmsuepl1rekn.jpg',
                     filename: 'YelpCamp/qqq8cccx6jfy0bcjva3s',
                 },
             ], // Set static images for all seeded campgrounds
