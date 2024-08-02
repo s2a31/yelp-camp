@@ -34,6 +34,11 @@ YelpCamp is a web application where users can create, view, edit, and delete cam
   - Add markers to maps for campground locations
   - Custom map popups displaying campground title and location
   - Customize map styles
+- Advanced map clustering features
+  - Implement cluster maps to manage large numbers of campgrounds visually
+  - Dynamically adjust cluster sizes and colors based on the density of campgrounds
+  - Customize popup information for individual and clustered campgrounds
+  - Enhance user interaction with dynamic map behaviors for zooming and clustering
 
 ## Installation
 
@@ -138,6 +143,7 @@ The application includes interactive map features using Mapbox:
 - Add markers to maps for campground locations
 - Custom map popups displaying campground title and location
 - Customize map styles
+- Implement cluster maps for an enhanced visualization of campground locations
 
 ## Code Organization
 

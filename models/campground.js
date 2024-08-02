@@ -13,6 +13,8 @@ ImageSchema.virtual('thumbnail').get(function () {
     return this.url.replace('/upload', '/upload/w_200'); // Modify the URL to request a 200px wide version of the image
 });
 
+const opts = { toJSON: { virtuals: true } }; // Options to include virtual properties when converting to JSON
+
 // Define the schema for Campground
 const CampgroundSchema = new Schema({
     title: String, // Title of the campground
@@ -41,6 +43,13 @@ const CampgroundSchema = new Schema({
             ref: 'Review', // The 'Review' model is referenced here
         },
     ],
+}, opts);
+
+// Virtual property for generating popup markup for map display
+CampgroundSchema.virtual('properties.popUpMarkup').get(function () {
+    return `
+    <strong><a href="/campgrounds/${this._id}">${this.title}</a><strong>
+    <p>${this.description.substring(0, 20)}...</p>` // Generate a short description and link for the popup
 });
 
 // Middleware to delete associated reviews when a campground is deleted
