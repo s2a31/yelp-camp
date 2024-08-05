@@ -1,11 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Home</title>
+        <meta charset="UTF-8" /> <!-- Set the character encoding to UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Ensure proper rendering and touch zooming on mobile devices -->
+        <title>YelpCamp</title> <!-- Set the title of the page -->
+        
+        <!-- Include Bootstrap CSS from a CDN with integrity and crossorigin attributes for security -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+        <link rel="stylesheet" href="/stylesheets/home.css" /> <!-- Include custom styles for the home page -->
     </head>
-    <body>
-        <h1>HOME! YELP CAMP!</h1>
+    <body class="d-flex text-center text-white bg-dark"> <!-- Apply flexbox, text centering, white text, and dark background -->
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"> <!-- Container to cover the entire page -->
+            <header class="mb-auto"> <!-- Header with automatic bottom margin -->
+                <div>
+                    <h3 class="float-start mb-0">YelpCamp</h3> <!-- Brand title, floats to the left with no margin -->
+                    <nav class="nav nav-masthead justify-content-center float-end"> <!-- Navigation bar floats to the right -->
+                        <a class="nav-link active" aria-current="page" href="#">Home</a> <!-- Home link, currently active -->
+                        <a class="nav-link" href="/campgrounds">Campgrounds</a> <!-- Link to campgrounds -->
+                        <% if(!currentUser) { %> <!-- If no user is logged in, show login and register links -->
+                        <a class="nav-link" href="/login">Login</a> <!-- Link to login page -->
+                        <a class="nav-link" href="/register">Register</a> <!-- Link to register page -->
+                        <% } else { %> <!-- If a user is logged in, show logout link -->
+                        <a class="nav-link" href="/logout">Logout</a> <!-- Link to logout -->
+                        <% } %>
+                    </nav>
+                </div>
+            </header>
+            <main class="px-3"> <!-- Main content with padding on the x-axis -->
+                <h1>YelpCamp</h1> <!-- Main heading -->
+                <p class="lead">
+                    Welcome to YelpCamp! <br />
+                    Jump right in and explore our many campgrounds. <br />
+                    Feel free to share some of your own and comment on others! <!-- Introduction text -->
+                </p>
+                <a href="/campgrounds" class="btn btn-lg btn-secondary fw-bold border-white bg-white">View Campgrounds</a> <!-- Button to view campgrounds, styled with bold font and white background -->
+            </main>
+
+            <footer class="mt-auto text-white opacity-50"> <!-- Footer with top margin and semi-transparent text -->
+                <p>&copy; 2024</p> <!-- Copyright notice -->
+            </footer>
+        </div>
+
+        <!-- Include Bootstrap JS bundle from a CDN with integrity and crossorigin attributes for security -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

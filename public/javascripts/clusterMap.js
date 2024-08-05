@@ -1,10 +1,12 @@
 mapboxgl.accessToken = mapToken; // Set the Mapbox access token
 const map = new mapboxgl.Map({
-    container: 'map', // ID of the container element for the map
+    container: 'cluster-map', // ID of the container element for the map
     style: 'mapbox://styles/mapbox/satellite-streets-v12', // Mapbox style URL
     center: [-103.5917, 40.6699], // Initial center of the map [longitude, latitude]
     zoom: 3 // Initial zoom level
 });
+
+map.addControl(new mapboxgl.NavigationControl()); // Add navigation controls (zoom and rotation) to the map
 
 // Execute the following once the map has loaded
 map.on('load', () => {

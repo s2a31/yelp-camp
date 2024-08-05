@@ -1,25 +1,36 @@
 <% layout('layouts/boilerplate') %> <!-- Use the boilerplate layout for this view -->
 
-<h1>Register</h1> <!-- Page title -->
-
-<form action="/register" method="POST" class="validated-form" novalidate> <!-- Form to register a new user -->
-    <div class="mb-3">
-        <label class="form-label" for="username">Username</label> <!-- Label for the username field -->
-        <input class="form-control" type="text" id="username" name="username" required /> <!-- Input for the username -->
-        <div class="valid-feedback">Looks good!</div>
-        <div class="invalid-feedback">Please provide a valid username.</div> <!-- Validation feedback for the username field -->
+<div class="container d-flex justify-content-center align-items-center mt-5"> <!-- Center the content both vertically and horizontally with a top margin -->
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4"> <!-- Center the card on medium to extra-large screens -->
+            <div class="card shadow"> <!-- Card component with a shadow effect -->
+                <img src="https://images.unsplash.com/photo-1571863533956-01c88e79957e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80"
+                    alt="A scenic view" class="card-img-top" /> <!-- Top image of the card with an alt description -->
+                <div class="card-body"> <!-- Card body containing the registration form -->
+                    <h5 class="card-title">Register</h5> <!-- Card title -->
+                    <form action="/register" method="POST" class="validated-form" novalidate> <!-- Registration form using POST method with custom validation -->
+                        <div class="mb-3">
+                            <label class="form-label" for="username">Username</label> <!-- Label for the username field -->
+                            <input class="form-control" type="text" id="username" name="username" required autofocus/> <!-- Input for the username, with autofocus and required validation -->
+                            <div class="valid-feedback">Looks good!</div> <!-- Feedback displayed when input is valid -->
+                            <div class="invalid-feedback">Please provide a valid username.</div> <!-- Validation feedback for the username field -->
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Email</label> <!-- Label for the email field -->
+                            <input class="form-control" type="email" id="email" name="email" required /> <!-- Input for the email, with required validation -->
+                            <div class="valid-feedback">Looks good!</div> <!-- Feedback displayed when input is valid -->
+                            <div class="invalid-feedback">Please provide a valid email address.</div> <!-- Validation feedback for the email field -->
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Password</label> <!-- Label for the password field -->
+                            <input class="form-control" type="password" id="password" name="password" required /> <!-- Input for the password, with required validation -->
+                            <div class="valid-feedback">Looks good!</div> <!-- Feedback displayed when input is valid -->
+                            <div class="invalid-feedback">Please provide a valid password.</div> <!-- Validation feedback for the password field -->
+                        </div>
+                        <button class="btn btn-success w-100">Register</button> <!-- Full-width register button styled with Bootstrap success color -->
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="mb-3">
-        <label class="form-label" for="email">Email</label> <!-- Label for the email field -->
-        <input class="form-control" type="email" id="email" name="email" required /> <!-- Input for the email -->
-        <div class="valid-feedback">Looks good!</div>
-        <div class="invalid-feedback">Please provide a valid email address.</div> <!-- Validation feedback for the email field -->
-    </div>
-    <div class="mb-3">
-        <label class="form-label" for="password">Password</label> <!-- Label for the password field -->
-        <input class="form-control" type="password" id="password" name="password" required /> <!-- Input for the password -->
-        <div class="valid-feedback">Looks good!</div>
-        <div class="invalid-feedback">Please provide a valid password.</div> <!-- Validation feedback for the password field -->
-    </div>
-    <button class="btn btn-success">Register</button> <!-- Submit button to register -->
-</form>
+</div>
