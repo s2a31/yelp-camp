@@ -40,6 +40,22 @@ YelpCamp is a web application where users can create, view, edit, and delete cam
   - Customize popup information for individual and clustered campgrounds
   - Enhance user interaction with dynamic map behaviors for zooming and clustering
 
+## Security Enhancements
+
+YelpCamp has been updated with several security enhancements to ensure a safer user environment and protect data integrity:
+
+- **MongoDB Injection Protection**: We've implemented measures to prevent NoSQL injection vulnerabilities by sanitizing user inputs using Joi.
+  
+- **Cross-Site Scripting (XSS) Protection**: Security has been bolstered to handle XSS by escaping HTML, enforcing Content Security Policies (CSP) with Helmet, and ensuring scripts are safe to execute.
+
+- **Content Security Policy (CSP)**: We've configured CSP to restrict the resources (such as scripts, images, and fonts) that can be loaded on our site, enhancing protection against XSS attacks and other vulnerabilities. Specific directives have been set to allow only trusted sources, such as self-hosted content and selected external services like Cloudinary for images and Mapbox for maps.
+
+- **Helmet**: Implemented Helmet to secure HTTP headers automatically. This adds various security headers to help protect from vulnerabilities involving insecure requests, clickjacking, and other potential threats.
+
+- **Session Management Enhancements**: Enhanced the security of user sessions by implementing HTTP-only and secure flags on cookies, ensuring that session tokens are not accessible via JavaScript and are transmitted securely.
+
+- **Error Handling Security**: We have refined how errors are handled and displayed. In production, error stacks are hidden from users to prevent exposure of sensitive application architecture details, reducing the risk of targeted attacks.
+
 ## Installation
 
 1. Clone the repository:

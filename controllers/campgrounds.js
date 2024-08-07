@@ -33,14 +33,12 @@ module.exports.renderNewForm = (req, res) => {
 
 // Controller function to show details of a specific campground
 module.exports.showCampground = async (req, res) => {
-    const campground = await Campground.findById(req.params.id)
-        .populate({
+    const campground = await Campground.findById(req.params.id).populate({
             path: 'reviews',
             populate: {
                 path: 'author',
             },
-        })
-        .populate('author'); // Find the campground by ID and populate the reviews and author fields
+        }).populate('author'); // Find the campground by ID and populate the reviews and author fields
     if (!campground) { // Check if the campground exists
         req.flash('error', 'Cannot find that campground!'); // Flash an error message if not found
         return res.redirect('/campgrounds'); // Redirect to the campgrounds index page
