@@ -21,12 +21,12 @@ const sample = (array) => array[Math.floor(Math.random() * array.length)];
 // Seed function to delete all campgrounds and add new ones
 const seedDB = async () => {
     await Campground.deleteMany({}); // Delete all existing campgrounds
-    for (let i = 0; i < 300; i++) {
+    for (let i = 0; i < 5; i++) {
         // Loop to create 300 new campgrounds
         const random1000 = Math.floor(Math.random() * 1000); // Pick a random index for cities array
         const price = Math.floor(Math.random() * 20) + 10; // Generate a random price between 10 and 30
         const camp = new Campground({
-            author: '66975fdf0fa92b6d1882311a', // Set a static author ID for all seeded campgrounds
+            author: '66b4f06b903abdd08ea84153', // Set a static author ID for all seeded campgrounds
             location: `${cities[random1000].city}, ${cities[random1000].state}`, // Set location to a random city and state
             title: `${sample(descriptors)} ${sample(places)}`, // Combine a random descriptor and place to form the title
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolores vero perferendis laudantium, consequuntur voluptatibus nulla architecto, sit soluta esse iure sed labore ipsam a cum nihil atque molestiae deserunt!', // Set a static description for all seeded campgrounds
@@ -45,7 +45,15 @@ const seedDB = async () => {
                 },
                 {
                     url: 'https://res.cloudinary.com/dfjatsdjg/image/upload/v1722022384/YelpCamp/snu0uuxjqmsuepl1rekn.jpg', // URL of the second static image
-                    filename: 'YelpCamp/qqq8cccx6jfy0bcjva3s', // Filename of the second static image
+                    filename: 'YelpCamp/snu0uuxjqmsuepl1rekn', // Filename of the second static image
+                },
+                {
+                    url: 'https://res.cloudinary.com/dfjatsdjg/image/upload/v1722256535/YelpCamp/wmmhn8zbucvljzjwgawq.jpg', // URL of the third static image
+                    filename: 'YelpCamp/wmmhn8zbucvljzjwgawq', // Filename of the third static image
+                },
+                {
+                    url: 'https://res.cloudinary.com/dfjatsdjg/image/upload/v1723132786/YelpCamp/rifpu6s1w10rrn9xdbto.jpg', // URL of the forth static image
+                    filename: 'YelpCamp/rifpu6s1w10rrn9xdbto', // Filename of the forth static image
                 },
             ], // Set static images for all seeded campgrounds
         });
