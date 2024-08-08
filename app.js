@@ -2,30 +2,29 @@ if (process.env.NODE_ENV !== "production") {
     require('dotenv').config(); // Load environment variables from .env file if not in production
 }
 
-const express = require('express'); // Import Express
-const path = require('path'); // Import Path
-const mongoose = require('mongoose'); // Import Mongoose
+const express = require('express'); // Import Express for building web applications
+const path = require('path'); // Import Path for working with file and directory paths
+const mongoose = require('mongoose'); // Import Mongoose for MongoDB object modeling
 const ejsMate = require('ejs-mate'); // Import ejs-mate for layout support in EJS
 const session = require('express-session'); // Import express-session for session management
 const flash = require('connect-flash'); // Import connect-flash for flash messages
-const ExpressError = require('./utils/ExpressError'); // Import custom ExpressError
+const ExpressError = require('./utils/ExpressError'); // Import custom ExpressError for error handling
 const methodOverride = require('method-override'); // Import method-override for supporting PUT and DELETE methods
 const passport = require('passport'); // Import Passport for authentication
 const LocalStrategy = require('passport-local'); // Import Passport-Local for local authentication strategy
 const User = require('./models/user'); // Import User model
-const helmet = require('helmet');
-
-const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet'); // Import Helmet for security headers
+const mongoSanitize = require('express-mongo-sanitize'); // Import express-mongo-sanitize to prevent NoSQL injection attacks
 
 const userRoutes = require('./routes/users'); // Import user routes
 const campgroundRoutes = require('./routes/campgrounds'); // Import campground routes
 const reviewRoutes = require('./routes/reviews'); // Import review routes
+const MongoStore = require('connect-mongo'); // Import connect-mongo to store session data in MongoDB
 
-// Construct the MongoDB Atlas connection URI
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}?${process.env.DB_OPTIONS}`;
+const dbUrl = process.env.DB_URL; // Database URL from environment variables
 
 // Connect to MongoDB Atlas using Mongoose
-mongoose.connect(uri);
+mongoose.connect(dbUrl);
 
 const db = mongoose.connection; // Get a reference to the database connection
 db.on('error', console.error.bind(console, 'connection error:')); // Handle connection errors
@@ -43,26 +42,43 @@ app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-enco
 app.use(methodOverride('_method')); // Middleware to support PUT and DELETE methods
 app.use(express.static(path.join(__dirname, 'public'))); // Middleware to serve static files
 app.use(mongoSanitize({
-    replaceWith: '_'
-}))
+    replaceWith: '_' // Replace prohibited characters with '_'
+}));
+
+const secret = process.env.SESSION_SECRET; // Secret for session encryption
+
+// Configure MongoDB session store
+const store = MongoStore.create({
+    mongoUrl: dbUrl, // Database URL
+    touchAfter: 24 * 60 * 60, // Only update session every 24 hours
+    crypto: {
+        secret, // Encrypt the session data
+    }
+});
+
+store.on("error", function (e) {
+    console.log("SESSION STORE ERROR", e); // Log session store errors
+});
 
 // Session configuration
 const sessionConfig = {
-    name: 'session',
-    secret: 'thisshouldbeabettersecret!',
+    store, // Use MongoDB session store
+    name: 'session', // Session cookie name
+    secret, // Secret for session encryption
     resave: false,
     saveUninitialized: true,
     cookie: {
-        httpOnly: true,
-        // secure: true,
-        expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // 1 week
-        maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+        httpOnly: true, // Ensure cookies are sent only over HTTP(S), not client JavaScript
+        secure: true, // Uncomment for HTTPS
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // Set cookie expiration to 1 week
+        maxAge: 1000 * 60 * 60 * 24 * 7, // Maximum age of the cookie in milliseconds (1 week)
     },
 };
 app.use(session(sessionConfig)); // Use session middleware
-app.use(flash()); // Use flash middleware
-app.use(helmet());
+app.use(flash()); // Use flash middleware for flash messages
+app.use(helmet()); // Use helmet to set various HTTP headers for security
 
+// Define content security policies
 const scriptSrcUrls = [
     "https://api.tiles.mapbox.com/",
     "https://api.mapbox.com/",
@@ -92,19 +108,19 @@ app.use(
     helmet.contentSecurityPolicy({
         directives: {
             defaultSrc: [],
-            connectSrc: ["'self'", ...connectSrcUrls],
-            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-            workerSrc: ["'self'", "blob:"],
+            connectSrc: ["'self'", ...connectSrcUrls], // Allowed sources for connecting
+            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls], // Allowed sources for scripts
+            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls], // Allowed sources for styles
+            workerSrc: ["'self'", "blob:"], // Allowed sources for workers
             objectSrc: [],
             imgSrc: [
                 "'self'",
                 "blob:",
                 "data:",
-                "https://res.cloudinary.com/dfjatsdjg/", 
-                "https://images.unsplash.com/",
+                "https://res.cloudinary.com/dfjatsdjg/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
+                "https://images.unsplash.com/", // Unsplash images
             ],
-            fontSrc: ["'self'", ...fontSrcUrls],
+            fontSrc: ["'self'", ...fontSrcUrls], // Allowed sources for fonts
         },
     })
 );
@@ -146,7 +162,9 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err }); // Render the error template with the error object
 });
 
-// Start the Express server on port 3000
-app.listen(3000, () => {
-    console.log('Serving on port 3000'); // Log that the server is running
+const port = process.env.PORT || 3000; // Set the port from environment or default to 3000
+
+// Start the Express server
+app.listen(port, () => {
+    console.log(`Serving on port ${port}`); // Log that the server is running
 });

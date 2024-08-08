@@ -2,10 +2,10 @@
 
 <div class="row">
     <div class="col-6 offset-3"> <!-- Center the error message on the page -->
-        <div class="alert alert-danger" role="alert"> <!-- Bootstrap alert with a danger style -->
-            <h4 class="alert-heading"><%= err.message %></h4> <!-- Display the error message -->
-            <% if (process.env.NODE_ENV !== "production") { %>
-            <p><%= err.stack %></p>
+        <div class="alert alert-danger" role="alert"> <!-- Bootstrap alert with a danger style for error display -->
+            <h4 class="alert-heading"><%= err.message %></h4> <!-- Display the error message in a heading -->
+            <% if (process.env.NODE_ENV !== "production") { %> <!-- Conditionally display the error stack trace in non-production environments -->
+            <p><%= err.stack %></p> <!-- Display the error stack trace for debugging -->
             <% } %>
         </div>
     </div>

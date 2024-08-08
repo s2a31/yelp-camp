@@ -4,12 +4,10 @@ const { places, descriptors } = require('./seedHelpers'); // Destructure and imp
 const Campground = require('../models/campground'); // Import the Campground model
 // const images = require('./images'); // Import the array of images (commented out as it's not used)
 require('dotenv').config(); // Load environment variables from .env file
-
-// Construct the MongoDB Atlas connection URI using environment variables
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}?${process.env.DB_OPTIONS}`;
+const dbUrl = process.env.DB_URL
 
 // Connect to MongoDB Atlas using Mongoose
-mongoose.connect(uri);
+mongoose.connect(dbUrl);
 
 const db = mongoose.connection; // Get a reference to the database connection
 db.on('error', console.error.bind(console, 'connection error:')); // Handle connection errors
