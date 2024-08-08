@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "21.7.2"
+  },
   "name": "yelp-camp",
   "version": "1.0.0",
   "description": "A web application for finding and reviewing campgrounds. Includes features like user authentication, image uploads, geocoding, and more.",
