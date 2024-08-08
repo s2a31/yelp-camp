@@ -35,7 +35,7 @@ Welcome to YelpCamp! A cutting-edge web platform that allows users to explore, c
 git clone https://github.com/s2a31/yelp-camp.git
 
 # Navigate to the project directory
-cd yelpcamp
+cd yelp-camp
 
 # Install dependencies
 npm install
