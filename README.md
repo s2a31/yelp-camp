@@ -2,6 +2,10 @@
 
 Welcome to YelpCamp! A cutting-edge web platform that allows users to explore, create, review, and manage campgrounds. Built with the modern stack of Node.js, Express, MongoDB, and Mongoose, YelpCamp delivers an intuitive, robust, and secure platform for camping enthusiasts and travelers worldwide.
 
+## Live Demo
+
+Visit the live version of YelpCamp here: [YelpCamp Live](https://yelp-camp-vtag.onrender.com/campgrounds)
+
 ## Key Features
 
 ### Comprehensive User Features
@@ -54,7 +58,7 @@ node app.js
 
 ## Usage
 
-After launching the server, visit `http://localhost:3000` to start exploring campgrounds, or log in to personalize your experience and manage your campgrounds.
+After launching the server, visit `http://localhost:3000` to start exploring campgrounds, or log in to personalize your experience and manage your campgrounds. For a preview of the deployed application, visit [YelpCamp Live](https://yelp-camp-vtag.onrender.com/campgrounds).
 
 ## Why YelpCamp?
 
