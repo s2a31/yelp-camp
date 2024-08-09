@@ -69,7 +69,6 @@ const sessionConfig = {
     saveUninitialized: true,
     cookie: {
         httpOnly: true, // Ensure cookies are sent only over HTTP(S), not client JavaScript
-        // secure: true, // Uncomment for HTTPS
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // Set cookie expiration to 1 week
         maxAge: 1000 * 60 * 60 * 24 * 7, // Maximum age of the cookie in milliseconds (1 week)
     },
